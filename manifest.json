@@ -1,7 +1,7 @@
 {
   "name": "ArisanKu App",
   "short_name": "ArisanKu",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f9fafb",
   "theme_color": "#2563eb",
