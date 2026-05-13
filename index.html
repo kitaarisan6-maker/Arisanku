@@ -13,23 +13,24 @@
       margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #ffffff; 
     }
     
-    /* 1. Mendorong area aplikasi ke bawah agar tidak tertutup Jam/Baterai HP */
+    /* 1. Memberikan ruang PASTI untuk Status Bar (Baterai/Sinyal) */
     .safe-area {
-      height: 100%;
       width: 100%;
-      padding-top: env(safe-area-inset-top, 38px); /* Jarak aman untuk Status Bar Android/iOS */
+      height: 100%;
+      /* Memaksa jarak atas minimal 35px, atau mengikuti poni HP (notch) jika ada */
+      padding-top: max(35px, env(safe-area-inset-top)); 
       box-sizing: border-box;
     }
     
-    /* 2. Wadah bingkai pemotong banner */
+    /* 2. Wadah pembatas iframe */
     .iframe-container {
       width: 100%;
       height: 100%;
-      overflow: hidden; 
       position: relative;
+      overflow: hidden; 
     }
     
-    /* 3. Menarik iframe ke atas persis setinggi banner Google (28px) */
+    /* 3. Menarik iframe ke atas HANYA untuk memotong banner Google (28px) */
     iframe { 
       position: absolute;
       top: -28px; 
