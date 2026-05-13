@@ -2,40 +2,55 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>ArisanKu</title>
   
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#ffffff">
 
   <style>
     body, html { 
-      margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #f9fafb; 
+      margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #ffffff; 
     }
-    /* Trik menyembunyikan banner Google Apps Script */
-    .app-container {
-      position: absolute;
-      top: -30px; /* Menggeser iframe ke atas sejauh 30px */
-      left: 0;
+    
+    /* 1. Mendorong area aplikasi ke bawah agar tidak tertutup Jam/Baterai HP */
+    .safe-area {
+      height: 100%;
       width: 100%;
-      height: calc(100% + 30px); /* Menambah tinggi agar bawahnya tidak terpotong */
+      padding-top: env(safe-area-inset-top, 38px); /* Jarak aman untuk Status Bar Android/iOS */
+      box-sizing: border-box;
     }
+    
+    /* 2. Wadah bingkai pemotong banner */
+    .iframe-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden; 
+      position: relative;
+    }
+    
+    /* 3. Menarik iframe ke atas persis setinggi banner Google (28px) */
     iframe { 
-      width: 100%; height: 100%; border: none; 
+      position: absolute;
+      top: -28px; 
+      left: 0;
+      width: 100%; 
+      height: calc(100% + 28px); 
+      border: none; 
     }
   </style>
 </head>
 <body>
 
-  <div class="app-container">
-    <iframe src="https://script.google.com/macros/s/AKfycbw74_ZhtR_Ho9kzWZIoUjqtW-YC77uwU2oW3EEl8Jx3T2BHoz66voRWMPNOMgqnSVCD/exec"></iframe>
+  <div class="safe-area">
+    <div class="iframe-container">
+      <iframe src="https://script.google.com/macros/s/AKfycbw74_ZhtR_Ho9kzWZIoUjqtW-YC77uwU2oW3EEl8Jx3T2BHoz66voRWMPNOMgqnSVCD/exec"></iframe>
+    </div>
   </div>
 
   <script>
-    // Mendaftarkan Service Worker agar muncul tombol "Install App" di HP
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(() => console.log('Service Worker Registered'));
+      navigator.serviceWorker.register('sw.js');
     }
   </script>
 
