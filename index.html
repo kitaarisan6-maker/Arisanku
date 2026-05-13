@@ -10,31 +10,31 @@
 
   <style>
     body, html { 
-      margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #ffffff; 
+      margin: 0; padding: 0; height: 100%; background: #ffffff; overflow: hidden; 
     }
     
-    /* 1. Memberikan ruang PASTI untuk Status Bar (Baterai/Sinyal) */
-    .safe-area {
-      width: 100%;
+    /* 1. Pembungkus utama untuk memberi jarak tipis bagi Jam/Baterai HP */
+    .app-wrapper {
+      position: relative; 
+      width: 100%; 
       height: 100%;
-      /* Memaksa jarak atas minimal 35px, atau mengikuti poni HP (notch) jika ada */
-      padding-top: max(35px, env(safe-area-inset-top)); 
+      padding-top: env(safe-area-inset-top, 12px); /* Jarak natural 12px */
       box-sizing: border-box;
     }
-    
-    /* 2. Wadah pembatas iframe */
-    .iframe-container {
-      width: 100%;
-      height: 100%;
-      position: relative;
+
+    /* 2. Area khusus untuk memotong banner Google */
+    .iframe-cut {
+      position: relative; 
+      width: 100%; 
+      height: 100%; 
       overflow: hidden; 
     }
-    
-    /* 3. Menarik iframe ke atas HANYA untuk memotong banner Google (28px) */
-    iframe { 
-      position: absolute;
+
+    /* 3. Menarik iframe ke atas sejauh 28px (setinggi banner) */
+    iframe {
+      position: absolute; 
       top: -28px; 
-      left: 0;
+      left: 0; 
       width: 100%; 
       height: calc(100% + 28px); 
       border: none; 
@@ -43,8 +43,9 @@
 </head>
 <body>
 
-  <div class="safe-area">
-    <div class="iframe-container">
+  <div class="app-wrapper">
+    <div class="iframe-cut">
+      <!-- Link web app kamu -->
       <iframe src="https://script.google.com/macros/s/AKfycbw74_ZhtR_Ho9kzWZIoUjqtW-YC77uwU2oW3EEl8Jx3T2BHoz66voRWMPNOMgqnSVCD/exec"></iframe>
     </div>
   </div>
